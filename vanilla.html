@@ -1,0 +1,25 @@
+<!--using HTML & JavaScript-->
+<!DOCTYPE html>
+<html lang="ko">
+  <!--button 클릭시 span의 click수 변경-->
+  <body>
+    <!--1) HTML 요소 생성-->
+    <span>Total Click: 0</span>
+    <button id="btn">Click me</button>
+
+    <script>
+      //2) HTML 요소 JavaScript로 가져오기(button)
+      const btn = document.getElementById("btn");
+      let counter = 0;
+      //3) event 생성(button)
+      function handleBtn() {
+        //4) 데이터 업데이트
+        counter = counter + 1;
+        //5) HTML에 반영
+        const span = document.querySelector("span");
+        span.innerText = `Total Click: ${counter}`;
+      }
+      btn.addEventListener("click", handleBtn);
+    </script>
+  </body>
+</html>
