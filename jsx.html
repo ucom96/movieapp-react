@@ -16,39 +16,28 @@
     <!--애초에 HTMl 요소를 React로 만들어서 render를 이용하여 이를 HTML로 번역한다-->
     <!--HTML 요소를 HTML에서 가져와서 작업하는 번거로운 방식이 아닌 애초에 JS로 생성해서 업데이트하는 방식-->
     <script type="text/babel">
-      //1) HTML 코드를 직접 작성하지 않고 JavaScript를 이용한다
-      /*
-      const h3 = React.createElement(
-        "h3",
-        { id: "hello-world" },
-        "Hello World"
-      );
-      */
-      const Title = <h3 id="hello-world">Hello World</h3>;
-      /*
-      const btn = React.createElement(
-        "button",
-        {
-          onClick: () => console.log("Click Me!"),
-          style: {
-            backgroundColor: "tomato",
-          },
-        },
-        "Click Me"
-      );
-      */
-      const Button = (
+      const root = document.getElementById("root");
+      //JSX를 이용하여 컴포넌트를 만드려면 함수 형태로 만들며 함수이름은 반드시 대문자로 형성해야한다
+      function Title() {
+        return <h3 id="hello-world">Hello World</h3>;
+      }
+      const Button = () => (
         <button
-          onclick={() => console.log("Click Me!")}
+          onClick={() => console.log("Click Me!")}
           style={{ backgroundColor: "tomato" }}
         >
           Click Me
         </button>
       );
-      const root = document.getElementById("root");
-      const div = React.createElement("div", null, [Title, Button]);
-      //2) ReactDOM의 render함수는 React element를 가지고 HTML로 만들어 배치한다
-      ReactDOM.render(div, root);
+      const Container = () => {
+        return (
+          <div>
+            <Title />
+            <Button />
+          </div>
+        );
+      };
+      ReactDOM.render(<Container />, root);
     </script>
   </body>
 </html>
