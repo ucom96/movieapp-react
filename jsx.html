@@ -1,0 +1,54 @@
+<!--using ReactJS-->
+<!--개발자들이 잘 쓰는 방식: using JSX-->
+<!DOCTYPE html>
+<html lang="ko">
+  <!--button 클릭시 span의 click수 변경-->
+  <body>
+    <div id="root"></div>
+    <!--ReactJS와 ReactDOM import-->
+    <!--ReactJS: 어플리케이션이 interactive해지도록 만들어줌-->
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <!--ReactDOM: React element들을 HTML에 올림-->
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <!--babel: JS를 HTML로 번역해줌 JSX 사용가능-->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!--React의 특징-->
+    <!--애초에 HTMl 요소를 React로 만들어서 render를 이용하여 이를 HTML로 번역한다-->
+    <!--HTML 요소를 HTML에서 가져와서 작업하는 번거로운 방식이 아닌 애초에 JS로 생성해서 업데이트하는 방식-->
+    <script type="text/babel">
+      //1) HTML 코드를 직접 작성하지 않고 JavaScript를 이용한다
+      /*
+      const h3 = React.createElement(
+        "h3",
+        { id: "hello-world" },
+        "Hello World"
+      );
+      */
+      const Title = <h3 id="hello-world">Hello World</h3>;
+      /*
+      const btn = React.createElement(
+        "button",
+        {
+          onClick: () => console.log("Click Me!"),
+          style: {
+            backgroundColor: "tomato",
+          },
+        },
+        "Click Me"
+      );
+      */
+      const Button = (
+        <button
+          onclick={() => console.log("Click Me!")}
+          style={{ backgroundColor: "tomato" }}
+        >
+          Click Me
+        </button>
+      );
+      const root = document.getElementById("root");
+      const div = React.createElement("div", null, [Title, Button]);
+      //2) ReactDOM의 render함수는 React element를 가지고 HTML로 만들어 배치한다
+      ReactDOM.render(div, root);
+    </script>
+  </body>
+</html>
