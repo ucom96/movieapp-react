@@ -1,5 +1,6 @@
 <!--using ReactJS-->
 <!--개발자들이 잘 쓰는 방식: using JSX-->
+<!--render의 불편한 방식-->
 <!DOCTYPE html>
 <html lang="ko">
   <!--button 클릭시 span의 click수 변경-->
@@ -17,27 +18,27 @@
     <!--HTML 요소를 HTML에서 가져와서 작업하는 번거로운 방식이 아닌 애초에 JS로 생성해서 업데이트하는 방식-->
     <script type="text/babel">
       const root = document.getElementById("root");
+      let counter = 0;
+      const countUp = () => {
+        counter = counter + 1;
+        //바뀐 데이터를 다시 리렌더링하여 UI에 반영해주어야함!
+        render();
+      };
+      const render = () => {
+        ReactDOM.render(<Container />, root);
+      };
       //JSX를 이용하여 컴포넌트를 만드려면 함수 형태로 만들며 함수이름은 반드시 대문자로 형성해야한다
-      function Title() {
-        return <h3 id="hello-world">Hello World</h3>;
-      }
-      const Button = () => (
-        <button
-          onClick={() => console.log("Click Me!")}
-          style={{ backgroundColor: "tomato" }}
-        >
-          Click Me
-        </button>
-      );
       const Container = () => {
         return (
           <div>
-            <Title />
-            <Button />
+            <h3>Total Click: {counter}</h3>
+            <button onClick={countUp} style={{ backgroundColor: "tomato" }}>
+              Click Me
+            </button>
           </div>
         );
       };
-      ReactDOM.render(<Container />, root);
+      render();
     </script>
   </body>
 </html>
