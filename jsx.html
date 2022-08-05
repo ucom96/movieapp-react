@@ -25,30 +25,41 @@
         const reset = () => {
           setAmount(0);
         };
+        const [flipped, setFlipped] = React.useState(false);
+        const onClick = () => {
+          setFlipped((current) => !current);
+          setAmount(0);
+        };
+        //Flip button을 누르면 Hours가 disabled 되고 Minutes에 쓴 숫자가 Hours에 반영만 되도록
+        //여기서 한번 더 누르면 Minutes가 disabled되고 Hours에 쓴 숫자가 Minutes에 반영되도록
         return (
           <div>
             <h1>Super Converter</h1>
             <div>
               <label htmlFor="minutes">Minutes</label>
               <input
-                value={amount}
+                value={flipped ? amount * 60 : amount}
                 id="minutes"
                 type="number"
                 placeholder="Minutes"
                 onChange={onChange}
+                disabled={flipped}
               ></input>
             </div>
             <h6>You want to convert {amount}</h6>
             <div>
               <label htmlFor="hours">Hours</label>
               <input
-                value={Math.round(amount / 60)}
+                value={flipped ? amount : Math.round(amount / 60)}
                 id="hours"
                 type="number"
                 placeholder="Hours"
+                onChange={onChange}
+                disabled={!flipped}
               ></input>
             </div>
             <button onClick={reset}>Reset</button>
+            <button onClick={onClick}>Flip</button>
           </div>
         );
       };
