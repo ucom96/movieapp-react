@@ -17,7 +17,7 @@
     <script type="text/babel">
       const root = document.getElementById("root");
       //JSX를 이용하여 컴포넌트를 만드려면 함수 형태로 만들며 함수이름은 반드시 대문자로 형성해야한다
-      const App = () => {
+      const MinutesToHours = () => {
         const [amount, setAmount] = React.useState(0);
         const onChange = (event) => {
           setAmount(event.target.value);
@@ -28,13 +28,13 @@
         const [flipped, setFlipped] = React.useState(false);
         const onClick = () => {
           setFlipped((current) => !current);
-          setAmount(0);
+          reset();
         };
         //Flip button을 누르면 Hours가 disabled 되고 Minutes에 쓴 숫자가 Hours에 반영만 되도록
         //여기서 한번 더 누르면 Minutes가 disabled되고 Hours에 쓴 숫자가 Minutes에 반영되도록
         return (
           <div>
-            <h1>Super Converter</h1>
+            <h1>Minutes to Hours</h1>
             <div>
               <label htmlFor="minutes">Minutes</label>
               <input
@@ -59,7 +59,31 @@
               ></input>
             </div>
             <button onClick={reset}>Reset</button>
-            <button onClick={onClick}>Flip</button>
+            <button onClick={onClick}>{flipped ? "Turn back" : "Flip"}</button>
+          </div>
+        );
+      };
+      const KmToMiles = () => {
+        return <h1>Km 2 Miles</h1>;
+      };
+      const App = () => {
+        const [index, setIndex] = React.useState("xx");
+        const onChange = (event) => {
+          setIndex(event.target.value);
+        };
+        return (
+          <div>
+            <h1>Super Converter</h1>
+            <hr />
+            <select onChange={onChange}>
+              <option value="xx">SelectUnits</option>
+              <option value="0">MinutesToHours</option>
+              <option value="1">KmToMiles</option>
+            </select>
+            <hr />
+            {index === "xx" ? "Select Your Units" : null}
+            {index === "0" ? <MinutesToHours /> : null}
+            {index === "1" ? <KmToMiles /> : null}
           </div>
         );
       };
