@@ -19,6 +19,9 @@ function App() {
   //컴포넌트가 렌더될때마다 반복실행되지 않고 첫 렌더때만 실행되기를 필요로하는 코드도 있을 수 있음!
   //useEffect()를 사용할것!
   console.log("it renders all time");
+  //[]는 컴포넌트가 처음 생성될때만 실행! 브라우저가 실행되는 것의 기준이아님!
+  //만약 컴포넌트가 사라질때만 렌더링되게 하고 싶다면 cleanup함수 이용
+  //즉, useEffect의 return문에 실행되고자 할 코드를 넣어주기만 하면됨!
   useEffect(() => {
     console.log("it renders only one time");
   }, []);
