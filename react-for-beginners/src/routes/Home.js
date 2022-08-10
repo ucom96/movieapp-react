@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
+import Movie from "../component/Movie";
 
-//맨 첫 화면에 로딩을 보여준후
-//앱이 처음으로 실행될때 coin을 select에 담아 보여준다
-
-function MovieApp() {
+function Home() {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   useEffect(() => {
@@ -16,7 +14,7 @@ function MovieApp() {
         setLoading(false);
       });
   }, []);
-  //console.log("data", data);
+
   return (
     <div>
       <h1>Movie App</h1>
@@ -25,16 +23,13 @@ function MovieApp() {
       ) : (
         <div>
           {movies.map((movie) => (
-            <div key={movie.id}>
-              <img src={movie.medium_cover_image} />
-              <h2>{movie.title}</h2>
-              <p>{movie.summary}</p>
-              <ul>
-                {movie.genres.map((genre) => (
-                  <li>{genre}</li>
-                ))}
-              </ul>
-            </div>
+            <Movie
+              id={movie.id}
+              coverImage={movie.medium_cover_image}
+              title={movie.title}
+              summary={movie.summary}
+              genres={movie.genres}
+            />
           ))}
         </div>
       )}
@@ -42,4 +37,4 @@ function MovieApp() {
   );
 }
 
-export default MovieApp;
+export default Home;
