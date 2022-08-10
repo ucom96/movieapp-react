@@ -1,40 +1,42 @@
-import Button from "./component/Button";
-import styles from "./App.module.css";
+//make ToDos
 import { useEffect, useState } from "react";
 
+//ToDos에 입력하고 submit시 ToDos의 목록이 추가가 되는 배열이 있어야할것
+//console.log()로 찍었을때 나오도록
 function App() {
-  const [counter, setCounter] = useState(0);
-  const [value, setValue] = useState("");
-  const onClick = () => {
-    setCounter((prev) => prev + 1);
-  };
-  //input에 뭔가를 입력할때마다 onChange함수가 실행이 되는데 그때마다 value의 state가 업데이트되면서 리렌더링됨
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
   const onChange = (event) => {
-    setValue(event.target.value);
+    setToDo(event.target.value);
   };
-  //input에 뭔가를 입력할때 즉 value의 state가 바뀔때만 실행하고자하는 코드가 있을 경우
-  useEffect(() => {
-    console.log("It renders when input value changes");
-  }, [value]);
-  //컴포넌트가 렌더될때마다 반복실행되지 않고 첫 렌더때만 실행되기를 필요로하는 코드도 있을 수 있음!
-  //useEffect()를 사용할것!
-  console.log("it renders all time");
-  //[]는 컴포넌트가 처음 생성될때만 실행! 브라우저가 실행되는 것의 기준이아님!
-  //만약 컴포넌트가 사라질때만 렌더링되게 하고 싶다면 cleanup함수 이용
-  //즉, useEffect의 return문에 실행되고자 할 코드를 넣어주기만 하면됨!
-  useEffect(() => {
-    console.log("it renders only one time");
-  }, []);
+  const onSubmit = (event) => {
+    event.preventDefault();
+    //toDo가 아무것도 없다면 해당 함수를 실행시키지 않도록
+    if (toDo === "") return;
+    setToDos((currentArray) => [toDo, ...currentArray]);
+    //submit시 input칸이 비도록
+    setToDo("");
+  };
+  //**line21을 onSubmit안에 두면 toDos에 현재 toDo가 반영이 안된 array가 나오게됨
+  console.log(toDos);
   return (
     <div>
-      <input
-        value={value}
-        placeholder="Search For.."
-        onChange={onChange}
-      ></input>
-      <h1 className={styles.title}>Hello ReactJS</h1>
-      <div>{counter}</div>
-      <Button text="click me" onClick={onClick} />
+      <h1>My ToDos {toDos.length}</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          value={toDo}
+          type="text"
+          placeholder="Write your to do..."
+          onChange={onChange}
+        ></input>
+        <button>Add To Do</button>
+      </form>
+      <hr />
+      <ul>
+        {toDos.map((item, idx) => (
+          <li key={idx}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
