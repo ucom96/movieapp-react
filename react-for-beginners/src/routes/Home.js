@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Movie from "../component/Movie";
+import PropTypes from "prop-types";
 
 function Home() {
   const [loading, setLoading] = useState(true);
@@ -10,6 +11,7 @@ function Home() {
     )
       .then((response) => response.json())
       .then((json) => {
+        //movies에는 각 movie객체들을 담은 배열을 담는다
         setMovies(json.data.movies);
         setLoading(false);
       });
