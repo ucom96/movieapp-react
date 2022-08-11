@@ -10,7 +10,7 @@ function Movie({ id, coverImage, title, summary, genres }) {
     <div>
       <img src={coverImage} />
       <h2>
-        <Link to="/movie">{title}</Link>
+        <Link to={`/movie/${id}`}>{title}</Link>
       </h2>
       <p>{summary}</p>
       <ul>
